@@ -62,7 +62,7 @@ const NotesList = ({ author }: notesListProps) => {
           />
 
           {notes.length > 0 ? (
-            <ul className="mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 notes__list">
+            <ul className="mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 notes__list w-full">
               {renderNotes()}
             </ul>
           ) : (

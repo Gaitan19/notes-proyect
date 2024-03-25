@@ -5,6 +5,7 @@ import ConnectSupabaseSteps from "@/components/tutorial/ConnectSupabaseSteps";
 import SignUpUserSteps from "@/components/tutorial/SignUpUserSteps";
 import Header from "@/components/Header";
 import { redirect } from "next/navigation";
+import { cookies } from "next/headers";
 
 
 export default async function Index() {
@@ -19,7 +20,15 @@ export default async function Index() {
     }
   };
 
-  return redirect("/login");
+  const cookieStore = cookies();
+
+  const data = cookieStore.get('sb-yavhtdnzcvaymaykpmju-auth-token');
+
+  if (!data) {
+    return redirect("/login");
+  }
+
+  return redirect("/userNotes");
 
 
   
