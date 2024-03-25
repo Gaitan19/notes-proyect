@@ -7,7 +7,10 @@ export async function POST(req: NextRequest) {
   const { data: notes, error } = await supabase
     .from("notes")
     .insert([newNote])
-    .select();
+    .select()
+    .single();
+
+    console.log('notes :>> ', notes);
 
   return NextResponse.json({
     status: 200,

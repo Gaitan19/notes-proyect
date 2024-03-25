@@ -1,17 +1,18 @@
-"use client";
+'use client';
 
-import { useCallback, useEffect, useState } from "react";
-import Note from "../Note";
-import { handleGetNotes } from "@/services/notes";
+import { useCallback, useEffect, useState } from 'react';
+import Note from '../Note';
+import { handleGetNotes } from '@/services/notes';
+import InputNote from '../InputNote';
 
 interface notesListProps {
   author: string;
 }
 
 interface NoteData {
-    id: number;
-    post: string;
-  }
+  id: number;
+  post: string;
+}
 
 const NotesList = ({ author }: notesListProps) => {
   const [notes, setNotes] = useState([]);
@@ -24,25 +25,35 @@ const NotesList = ({ author }: notesListProps) => {
           setNotes(() => data.body.data);
         }
       } catch (error) {
-        console.log("error :>> ", error);
+        console.log('error :>> ', error);
       }
     }
   }, [setNotes]);
 
   useEffect(() => {
     fetchData();
-    console.log("notes :>> ", notes);
+    console.log('notes :>> ', notes);
   }, [fetchData]);
 
   const renderNotes = () =>
-    notes.map((note:NoteData) => {
-      return <Note id={note.id} text={note.post} key={note.id}/>
+    notes.map((note: NoteData) => {
+      return <Note id={note.id} text={note.post} key={note.id} />;
     });
+
+  const handleUpdateNotes = (newNotes: any) => {
+    setNotes(() => newNotes);
+  };
 
   return (
     <section className="w-full">
       <div className="container mx-auto">
         <div className="flex justify-center items-center">
+          <InputNote
+            author={author}
+            notes={notes}
+            updatesNotes={handleUpdateNotes}
+          />
+
           <ul>{notes.length > 0 && renderNotes()}</ul>
         </div>
       </div>
