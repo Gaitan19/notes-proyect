@@ -1,6 +1,7 @@
-import { use, useState } from 'react';
+import {  useState } from 'react';
 import { alertMessage } from '../Alert';
 import { handlePostNote } from '@/services/notes';
+import { FaPaperPlane } from 'react-icons/fa';
 
 interface UpdateNote {
   (text: any): void;
@@ -43,30 +44,33 @@ const InputNote = ({ author, updatesNotes, notes }: inputNote) => {
 
     if (status === 200) {
       alertMessage.success('Note added successfully');
-      console.log('data :>> ', data);
 
       await updatesNotes([...notes, data.body.data]);
       setNewNote(()=> '')
     }
 
     else{
-        alertMessage.error("Note couldn't be added")
+        alertMessage.error(data.body.message)
     }
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <input
-          placeholder="Enter a note"
-          type="text"
-          value={newNote}
-          onChange={handleChangeInput}
-          required
-        />
-        <button type="submit">submit</button>
-      </form>
-    </div>
+    <div className="mt-8 bg-gray-100 rounded-md p-4 shadow-md">
+    <form onSubmit={handleSubmit} className="flex items-center">
+      <input
+        className="flex-grow py-2 px-4 mr-2 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-gray-600"
+        placeholder="Enter a note"
+        type="text"
+        value={newNote}
+        onChange={handleChangeInput}
+        required
+      />
+      <button className="py-2 px-4 rounded-md bg-gray-600 text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-600 focus:ring-opacity-50 flex items-center gap-1">
+        <span>Submit</span>
+        <FaPaperPlane/>
+      </button>
+    </form>
+  </div>
   );
 };
 

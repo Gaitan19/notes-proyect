@@ -18,7 +18,7 @@ const Alert = () => {
       rtl={false}
       pauseOnFocusLoss
       draggable={false}
-      theme="light"
+      theme="dark"
     />
   );
 };

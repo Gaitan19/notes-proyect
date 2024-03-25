@@ -1,26 +1,27 @@
-import HeaderNotes from "@/components/HeaderNotes";
-import NotesList from "@/components/NotesList";
-import { cookies } from "next/headers";
-// import { createClient } from "@/utils/supabase/client";
-// import { useEffect, useState } from "react";
-// import { createClient } from "@/utils/supabase/server";
+import HeaderNotes from '@/components/HeaderNotes';
+import NotesList from '@/components/NotesList';
+import { cookies } from 'next/headers';
+import { redirect } from "next/navigation";
 
 
+export default function UserNotesPage() {
+  const cookieStore = cookies();
 
-export default  function UserNotesPage() {
-    //     const supabase = createClient();
-    const cookieStore = cookies();
+  const data = cookieStore.get('sb-yavhtdnzcvaymaykpmju-auth-token');
 
-    const data = cookieStore.get('sb-yavhtdnzcvaymaykpmju-auth-token');
-
-    const userString = data?.value;
-    const {user} = userString ? JSON.parse(userString) : null;
-// console.log('user :>> ', user);
-
-    return (
-     <>
-        <HeaderNotes/>
-        <NotesList author={user.email}/>
-     </>
-    );
+  if (!data) {
+    return redirect("/login");
   }
+
+  const userString = data?.value;
+  const { user } = userString ? JSON.parse(userString) : null;
+
+  
+
+  return (
+    <>
+      <HeaderNotes />
+      <NotesList author={user.email} />
+    </>
+  );
+}
