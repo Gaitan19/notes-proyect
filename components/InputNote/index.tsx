@@ -1,6 +1,7 @@
-import { use, useState } from 'react';
+import {  useState } from 'react';
 import { alertMessage } from '../Alert';
 import { handlePostNote } from '@/services/notes';
+import { FaPaperPlane } from 'react-icons/fa';
 
 interface UpdateNote {
   (text: any): void;
@@ -65,8 +66,9 @@ const InputNote = ({ author, updatesNotes, notes }: inputNote) => {
         onChange={handleChangeInput}
         required
       />
-      <button className="py-2 px-4 rounded-md bg-gray-600 text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-600 focus:ring-opacity-50">
-        Submit
+      <button className="py-2 px-4 rounded-md bg-gray-600 text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-600 focus:ring-opacity-50 flex items-center gap-1">
+        <span>Submit</span>
+        <FaPaperPlane/>
       </button>
     </form>
   </div>

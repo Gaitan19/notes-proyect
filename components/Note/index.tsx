@@ -1,4 +1,5 @@
 'use client';
+import { FaPen, FaTrash, FaSave } from 'react-icons/fa';
 import { handleDeleteNote, handleEditNote } from '@/services/notes';
 import { alertMessage } from '../Alert';
 import { useState } from 'react';
@@ -46,24 +47,10 @@ const Note = ({ id, text, notes, updatesNotes }: NoteProps) => {
     setIsEditing((prevState) => !prevState);
   };
 
-  const handleKeyDown = (event:any) => {
+  const handleKeyDown = (event: any) => {
     if (event.key === 'Enter') {
       handleUpdate();
     }
-  };
-
-  const handleEditingText = () => {
-    if (!isEditing) {
-      return <label>{noteValue}</label>;
-    }
-
-    return (
-      <input
-        defaultValue={noteValue}
-        onChange={handleChangeInput}
-        onKeyDown={handleKeyDown}
-      />
-    );
   };
 
   const handleChangeInput = (input: any) => {
@@ -99,25 +86,57 @@ const Note = ({ id, text, notes, updatesNotes }: NoteProps) => {
     }
   };
 
-  const handleEditingButton = () => {
+  const handleEditingText = () => {
     if (!isEditing) {
-      return <button onClick={handleEditing}>Edit</button>;
+      return <label className="text-black">{noteValue}</label>;
     }
 
-    return <button onClick={handleUpdate}>Save</button>;
+    return (
+      <input
+        defaultValue={noteValue}
+        onChange={handleChangeInput}
+        onKeyDown={handleKeyDown}
+        className="py-1 px-2 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-gray-600"
+      />
+    );
+  };
+  const handleEditingButton = () => {
+    if (!isEditing) {
+      return (
+        <button
+          onClick={handleEditing}
+          className="py-2 px-2 rounded-md bg-gray-600 text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-600 focus:ring-opacity-50"
+        >
+          {' '}
+          <FaPen />
+        </button>
+      );
+    }
+
+    return (
+      <button
+        onClick={handleUpdate}
+        className="py-2 px-2 rounded-md bg-gray-600 text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-600 focus:ring-opacity-50"
+      >
+        <FaSave />
+      </button>
+    );
   };
 
   return (
-    <li>
-      {/* <span>{text}</span>
-       */}
-
-       {handleEditingText()}
-      <div>
-        {/* <button>edit</button>
-         */}
-         {handleEditingButton()}
-        <button onClick={handleDeleteNotes}>delete</button>
+    <li className="mt-4 border border-gray-200 rounded-md p-2 flex justify-between items-center bg-gray-100">
+      <div className="flex items-center justify-between w-full">
+        {handleEditingText()}
+        <div className="ml-4 flex items-center gap-2">
+          {handleEditingButton()}
+          <button
+            onClick={handleDeleteNotes}
+            className="py-2 px-2 rounded-md bg-gray-600 text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-600 focus:ring-opacity-50"
+          >
+            {' '}
+            <FaTrash />
+          </button>
+        </div>
       </div>
     </li>
   );

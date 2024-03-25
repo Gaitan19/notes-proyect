@@ -4,6 +4,7 @@ import { useCallback, useEffect, useState } from 'react';
 import Note from '../Note';
 import { handleGetNotes } from '@/services/notes';
 import InputNote from '../InputNote';
+import GridLoader from 'react-spinners/GridLoader';
 
 interface notesListProps {
   author: string;
@@ -56,11 +57,21 @@ const NotesList = ({ author }: notesListProps) => {
     <section className="bg-background py-8 w-ful">
       <div className="container mx-auto">
         <div className="flex flex-col items-center">
-          <InputNote author={author} notes={notes} updatesNotes={handleUpdateNotes} />
+          <InputNote
+            author={author}
+            notes={notes}
+            updatesNotes={handleUpdateNotes}
+          />
 
-          <ul className="mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-            {notes.length > 0 && renderNotes()}
-          </ul>
+          {notes.length > 0 ? (
+            <ul className="mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 notes__list">
+              {renderNotes()}
+            </ul>
+          ) : (
+            <div className="pt-9">
+              <GridLoader color="#4B5563" />
+            </div>
+          )}
         </div>
       </div>
     </section>
