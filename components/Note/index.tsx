@@ -32,10 +32,8 @@ const Note = ({ id, text, notes, updatesNotes }: NoteProps) => {
 
     if (status === 200) {
       alertMessage.success('Note deleted successfully');
-      console.log('data :>> ', data);
 
       const newNotes = notes.filter((note: any) => note.id !== id);
-      console.log('newNotes :>> ', newNotes);
 
       await updatesNotes(newNotes);
     } else {
@@ -79,7 +77,7 @@ const Note = ({ id, text, notes, updatesNotes }: NoteProps) => {
 
         alertMessage.success('Note edited successfully');
       } else {
-        alertMessage.error("Note couldn't be edited");
+        alertMessage.error(body.message);
       }
     } else {
       alertMessage.error("the Note can't be emty");

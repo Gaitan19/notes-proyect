@@ -44,14 +44,13 @@ const InputNote = ({ author, updatesNotes, notes }: inputNote) => {
 
     if (status === 200) {
       alertMessage.success('Note added successfully');
-      console.log('data :>> ', data);
 
       await updatesNotes([...notes, data.body.data]);
       setNewNote(()=> '')
     }
 
     else{
-        alertMessage.error("Note couldn't be added")
+        alertMessage.error(data.body.message)
     }
   };
 

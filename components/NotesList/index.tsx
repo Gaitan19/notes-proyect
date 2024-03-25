@@ -26,14 +26,12 @@ const NotesList = ({ author }: notesListProps) => {
           setNotes(() => data.body.data);
         }
       } catch (error) {
-        console.log('error :>> ', error);
       }
     }
   }, [setNotes]);
 
   useEffect(() => {
     fetchData();
-    console.log('notes :>> ', notes);
   }, [fetchData]);
 
   const handleUpdateNotes = (newNotes: any) => {
