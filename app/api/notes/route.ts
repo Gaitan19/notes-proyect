@@ -9,7 +9,6 @@ export async function POST(req: NextRequest) {
     .insert([newNote])
     .select()
     .single();
-  console.log({ error });
 
   return NextResponse.json({
     status: !error ? 200 : 400,

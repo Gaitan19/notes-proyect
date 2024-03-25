@@ -10,7 +10,6 @@ const HeaderNotes = () => {
             <span className="text-2xl font-bold text-black">My Notes</span>
           </div>
           <div className="flex items-center space-x-8">
-            <DeployButton />
             <AuthButton />
           </div>
         </nav>
