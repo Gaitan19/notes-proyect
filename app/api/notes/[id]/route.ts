@@ -40,3 +40,20 @@ export async function PATCH(req: NextRequest, context: any) {
     },
   });
 }
+
+export async function DELETE(req: NextRequest, context: any) {
+  const supabase = createClient();
+
+  const { params } = context;
+
+  const response = await supabase.from("notes").delete().eq("id", params.id);
+
+  console.log(response);
+
+  return NextResponse.json({
+    status: 200,
+    body: {
+      data: response.statusText,
+    },
+  });
+}
