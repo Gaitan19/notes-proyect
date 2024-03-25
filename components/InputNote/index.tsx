@@ -48,6 +48,10 @@ const InputNote = ({ author, updatesNotes, notes }: inputNote) => {
       await updatesNotes([...notes, data.body.data]);
       setNewNote(()=> '')
     }
+
+    else{
+        alertMessage.error("Note couldn't be added")
+    }
   };
 
   return (

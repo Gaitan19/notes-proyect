@@ -35,14 +35,22 @@ const NotesList = ({ author }: notesListProps) => {
     console.log('notes :>> ', notes);
   }, [fetchData]);
 
-  const renderNotes = () =>
-    notes.map((note: NoteData) => {
-      return <Note id={note.id} text={note.post} key={note.id} />;
-    });
-
   const handleUpdateNotes = (newNotes: any) => {
     setNotes(() => newNotes);
   };
+
+  const renderNotes = () =>
+    notes.map((note: NoteData) => {
+      return (
+        <Note
+          id={note.id}
+          text={note.post}
+          notes={notes}
+          updatesNotes={handleUpdateNotes}
+          key={note.id}
+        />
+      );
+    });
 
   return (
     <section className="w-full">
