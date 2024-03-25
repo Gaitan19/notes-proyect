@@ -9,7 +9,7 @@ export async function GET(req: NextRequest, context: any) {
   const { data: notes, error } = await supabase
     .from("notes")
     .select()
-    .eq("user_id", params.id);
+    .eq("author", params.id);
 
   return NextResponse.json({
     status: 200,

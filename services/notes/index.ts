@@ -1,12 +1,12 @@
 import handleApiRequest from "@/services";
 
 interface note {
-  user_id?: string;
+  author?: string;
   post: string;
 }
 
-const handleGetNotes = async (user_id: string | undefined) => {
-  const { data, status } = await handleApiRequest("GET", `/${user_id}`, "");
+const handleGetNotes = async (author: string | undefined) => {
+  const { data, status } = await handleApiRequest("GET", `/${author}`, "");
 
   return { data, status };
 };

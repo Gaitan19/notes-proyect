@@ -15,20 +15,12 @@ export default  function UserNotesPage() {
 
     const userString = data?.value;
     const {user} = userString ? JSON.parse(userString) : null;
-
-    console.log('user_id:>> ', user.id);
-
-    
-// const response =  supabase.auth.getUser()
-
-//   const response =  supabase.auth.getUser();
-
-
+// console.log('user :>> ', user);
 
     return (
      <>
         <HeaderNotes/>
-        {/* <NotesList user_id={user_id}/> */}
+        <NotesList author={user.email}/>
      </>
     );
   }
