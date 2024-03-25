@@ -42,7 +42,7 @@ const NotesList = ({ author }: notesListProps) => {
   return (
     <section className="w-full">
       <div className="container mx-auto">
-        <div>
+        <div className="flex justify-center items-center">
           <ul>{notes.length > 0 && renderNotes()}</ul>
         </div>
       </div>
