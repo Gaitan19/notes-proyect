@@ -1,5 +1,5 @@
 import { GeistSans } from "geist/font/sans";
-import "./globals.css";
+import "@/styles/main.scss"
 import { Alert } from "@/components/Alert";
 import 'react-toastify/dist/ReactToastify.css';
 

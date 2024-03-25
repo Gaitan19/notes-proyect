@@ -55,18 +55,21 @@ const InputNote = ({ author, updatesNotes, notes }: inputNote) => {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <input
-          placeholder="Enter a note"
-          type="text"
-          value={newNote}
-          onChange={handleChangeInput}
-          required
-        />
-        <button type="submit">submit</button>
-      </form>
-    </div>
+    <div className="mt-8 bg-gray-100 rounded-md p-4 shadow-md">
+    <form onSubmit={handleSubmit} className="flex items-center">
+      <input
+        className="flex-grow py-2 px-4 mr-2 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-gray-600"
+        placeholder="Enter a note"
+        type="text"
+        value={newNote}
+        onChange={handleChangeInput}
+        required
+      />
+      <button className="py-2 px-4 rounded-md bg-gray-600 text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-600 focus:ring-opacity-50">
+        Submit
+      </button>
+    </form>
+  </div>
   );
 };
 

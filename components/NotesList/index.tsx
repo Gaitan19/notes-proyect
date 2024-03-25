@@ -53,16 +53,14 @@ const NotesList = ({ author }: notesListProps) => {
     });
 
   return (
-    <section className="w-full">
+    <section className="bg-background py-8 w-ful">
       <div className="container mx-auto">
-        <div className="flex justify-center items-center">
-          <InputNote
-            author={author}
-            notes={notes}
-            updatesNotes={handleUpdateNotes}
-          />
+        <div className="flex flex-col items-center">
+          <InputNote author={author} notes={notes} updatesNotes={handleUpdateNotes} />
 
-          <ul>{notes.length > 0 && renderNotes()}</ul>
+          <ul className="mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+            {notes.length > 0 && renderNotes()}
+          </ul>
         </div>
       </div>
     </section>
