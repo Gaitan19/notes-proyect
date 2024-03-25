@@ -55,7 +55,7 @@ const InputNote = ({ author, updatesNotes, notes }: inputNote) => {
   };
 
   return (
-    <div className="mt-8 bg-gray-100 rounded-md p-4 shadow-md">
+    <div className="mt-8 bg-gray-100 rounded-md p-4 shadow-md w-full">
     <form onSubmit={handleSubmit} className="flex items-center">
       <input
         className="flex-grow py-2 px-4 mr-2 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-gray-600"
@@ -66,7 +66,7 @@ const InputNote = ({ author, updatesNotes, notes }: inputNote) => {
         required
       />
       <button className="py-2 px-4 rounded-md bg-gray-600 text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-600 focus:ring-opacity-50 flex items-center gap-1">
-        <span>Submit</span>
+        <span className='hidden sm:block'>Submit</span>
         <FaPaperPlane/>
       </button>
     </form>

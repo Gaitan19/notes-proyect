@@ -7,7 +7,7 @@ const HeaderNotes = () => {
       <div className="container mx-auto">
         <nav className="flex justify-between items-center">
           <div className="flex items-center">
-            <span className="text-2xl font-bold text-black">My Notes</span>
+            <span className="hidden sm:block text-2xl font-bold text-black">My Notes</span>
           </div>
           <div className="flex items-center space-x-8">
             <AuthButton />

@@ -52,7 +52,7 @@ const NotesList = ({ author }: notesListProps) => {
     });
 
   return (
-    <section className="bg-background py-8 w-ful">
+    <section className="bg-background py-8 w-full">
       <div className="container mx-auto">
         <div className="flex flex-col items-center">
           <InputNote
