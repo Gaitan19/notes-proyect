@@ -29,7 +29,8 @@ export async function PATCH(req: NextRequest, context: any) {
     .from("notes")
     .update(updatingValues)
     .eq("id", params.id)
-    .select();
+    .select()
+    .single();
 
   console.log({ error });
 
