@@ -1,8 +1,8 @@
-'use client';
-import { FaPen, FaTrash, FaSave } from 'react-icons/fa';
-import { handleDeleteNote, handleEditNote } from '@/services/notes';
-import { alertMessage } from '../Alert';
-import { useState } from 'react';
+"use client";
+import { FaPen, FaTrash, FaSave } from "react-icons/fa";
+import { handleDeleteNote, handleEditNote } from "@/services/notes";
+import { alertMessage } from "../Alert";
+import { useState } from "react";
 
 interface UpdateNote {
   (text: any): void;
@@ -28,10 +28,12 @@ const Note = ({ id, text, notes, updatesNotes }: NoteProps) => {
   const [noteValue, setNoteValue] = useState(text);
 
   const handleDeleteNotes = async () => {
-    const { data, status } = await handleDeleteNote(id);
+    const {
+      data: { status },
+    } = await handleDeleteNote(id);
 
     if (status === 200) {
-      alertMessage.success('Note deleted successfully');
+      alertMessage.success("Note deleted successfully");
 
       const newNotes = notes.filter((note: any) => note.id !== id);
 
@@ -46,7 +48,7 @@ const Note = ({ id, text, notes, updatesNotes }: NoteProps) => {
   };
 
   const handleKeyDown = (event: any) => {
-    if (event.key === 'Enter') {
+    if (event.key === "Enter") {
       handleUpdate();
     }
   };
@@ -56,11 +58,10 @@ const Note = ({ id, text, notes, updatesNotes }: NoteProps) => {
   };
 
   const handleUpdate = async () => {
-    if (noteValue !== '') {
+    if (noteValue !== "") {
       const {
-        data: { body },
-        status,
-      } = await handleEditNote(id, { post: noteValue });
+        data: { body, status },
+      } = await handleEditNote(id, noteValue);
 
       if (status === 200) {
         setIsEditing((prevEditing) => !prevEditing);
@@ -75,7 +76,7 @@ const Note = ({ id, text, notes, updatesNotes }: NoteProps) => {
 
         await updatesNotes(newNotes);
 
-        alertMessage.success('Note edited successfully');
+        alertMessage.success("Note edited successfully");
       } else {
         alertMessage.error(body.message);
       }
@@ -94,7 +95,7 @@ const Note = ({ id, text, notes, updatesNotes }: NoteProps) => {
         defaultValue={noteValue}
         onChange={handleChangeInput}
         onKeyDown={handleKeyDown}
-        className="py-1 px-2 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-gray-600"
+        className="w-full py-1 px-2 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-gray-600"
       />
     );
   };
@@ -105,7 +106,7 @@ const Note = ({ id, text, notes, updatesNotes }: NoteProps) => {
           onClick={handleEditing}
           className="py-2 px-2 rounded-md bg-gray-600 text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-600 focus:ring-opacity-50"
         >
-          {' '}
+          {" "}
           <FaPen />
         </button>
       );
@@ -131,7 +132,7 @@ const Note = ({ id, text, notes, updatesNotes }: NoteProps) => {
             onClick={handleDeleteNotes}
             className="py-2 px-2 rounded-md bg-gray-600 text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-600 focus:ring-opacity-50"
           >
-            {' '}
+            {" "}
             <FaTrash />
           </button>
         </div>
