@@ -1,31 +1,34 @@
-'use client';
+"use client";
 
-import { useCallback, useEffect, useState } from 'react';
-import Note from '../Note';
-import { handleGetNotes } from '@/services/notes';
-import InputNote from '../InputNote';
-import GridLoader from 'react-spinners/GridLoader';
-
-interface notesListProps {
-  author: string;
-}
+import { useCallback, useEffect, useState } from "react";
+import Note from "../Note";
+import { handleGetNotes } from "@/services/notes";
+import InputNote from "../InputNote";
+import GridLoader from "react-spinners/GridLoader";
+import { useRouter } from "next/navigation";
 
 interface NoteData {
   id: number;
   post: string;
 }
 
-const NotesList = ({ author }: notesListProps) => {
+const NotesList = () => {
+  const router = useRouter();
   const [notes, setNotes] = useState([]);
 
   const fetchData = useCallback(async () => {
-    if (notes.length < 1) {
+    if (notes?.length < 1) {
       try {
-        const { data, status } = await handleGetNotes(author);
+        const { data:{body,status} } = await handleGetNotes();
         if (status === 200) {
-          setNotes(() => data.body.data);
+          setNotes(() => body.data);
         }
+        else if(status === 400){
+          router.push("login")
+        }
+
       } catch (error) {
+        console.log("error :>> ", error);
       }
     }
   }, [setNotes]);
@@ -55,13 +58,9 @@ const NotesList = ({ author }: notesListProps) => {
     <section className="bg-background py-8 w-full">
       <div className="container mx-auto">
         <div className="flex flex-col items-center">
-          <InputNote
-            author={author}
-            notes={notes}
-            updatesNotes={handleUpdateNotes}
-          />
+          <InputNote notes={notes} updatesNotes={handleUpdateNotes} />
 
-          {notes.length > 0 ? (
+          {notes?.length > 0 ? (
             <ul className="mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 notes__list w-full">
               {renderNotes()}
             </ul>

@@ -1,12 +1,7 @@
 import handleApiRequest from "@/services";
 
-interface note {
-  author?: string;
-  post: string;
-}
-
-const handleGetNotes = async (author: string | undefined) => {
-  const { data, status } = await handleApiRequest("GET", `/${author}`, "");
+const handleGetNotes = async () => {
+  const { data, status } = await handleApiRequest("GET", `/`, "");
 
   return { data, status };
 };
@@ -17,8 +12,10 @@ const handleGetNote = async (id: number) => {
   return { data, status };
 };
 
-const handlePostNote = async (newNote: note) => {
-  const { data, status } = await handleApiRequest("POST", ``, newNote);
+const handlePostNote = async (newNote: string) => {
+  const { data, status } = await handleApiRequest("POST", ``, {
+    post: newNote,
+  });
 
   return { data, status };
 };
@@ -29,12 +26,10 @@ const handleDeleteNote = async (id: number) => {
   return { data, status };
 };
 
-const handleEditNote = async (idNote: number, updatedNote: note) => {
-  const { data, status } = await handleApiRequest(
-    "PATCH",
-    `/${idNote}`,
-    updatedNote
-  );
+const handleEditNote = async (idNote: number, updatedNote: string) => {
+  const { data, status } = await handleApiRequest("PATCH", `/${idNote}`, {
+    post: updatedNote,
+  });
 
   return { data, status };
 };

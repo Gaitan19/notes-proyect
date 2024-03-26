@@ -1,23 +1,5 @@
-import { createClient } from '@/utils/supabase/server';
-import { NextRequest, NextResponse } from 'next/server';
-
-export async function GET(req: NextRequest, context: any) {
-  const supabase = createClient();
-
-  const { params } = context;
-
-  const { data: notes, error } = await supabase
-    .from('notes')
-    .select()
-    .eq('author', params.id);
-
-  return NextResponse.json({
-    status: 200,
-    body: {
-      data: notes?.sort((a, b) => a.id - b.id),
-    },
-  });
-}
+import { createClient } from "@/utils/supabase/server";
+import { NextRequest, NextResponse } from "next/server";
 
 export async function PATCH(req: NextRequest, context: any) {
   const supabase = createClient();
@@ -26,9 +8,9 @@ export async function PATCH(req: NextRequest, context: any) {
 
   const updatingValues = await req.json();
   const { data: notes, error } = await supabase
-    .from('notes')
+    .from("notes")
     .update(updatingValues)
-    .eq('id', params.id)
+    .eq("id", params.id)
     .select()
     .single();
 
@@ -46,7 +28,7 @@ export async function DELETE(req: NextRequest, context: any) {
 
   const { params } = context;
 
-  const response = await supabase.from('notes').delete().eq('id', params.id);
+  const response = await supabase.from("notes").delete().eq("id", params.id);
 
   return NextResponse.json({
     status: 200,

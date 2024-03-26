@@ -7,7 +7,6 @@ import Header from "@/components/Header";
 import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
 
-
 export default async function Index() {
   const canInitSupabaseClient = () => {
     // This function is just for the interactive tutorial.
@@ -20,19 +19,17 @@ export default async function Index() {
     }
   };
 
-  const cookieStore = cookies();
+  const supabase = createClient();
 
-  const data = cookieStore.get('sb-yavhtdnzcvaymaykpmju-auth-token');
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
 
-  if (!data) {
+  if (!user) {
     return redirect("/login");
   }
 
   return redirect("/userNotes");
-
-
-  
-
 
   const isSupabaseConnected = canInitSupabaseClient();
 
